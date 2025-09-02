@@ -6,10 +6,7 @@ class Math {
 
     public static void main(String[] args){
     //Use the // to create single line comments to either add info or to take out code for debugging
-    for(int i =2; i<=10; i+=2);
-    {
-    System.out.print(i);
-    }
+  
 
     //We will be using System.out.println and System.out.print throughout the year. Try using both below to see what the difference is!
 
