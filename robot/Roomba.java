@@ -4,11 +4,12 @@ import kareltherobot.*;
 
 public class Roomba implements Directions {
 
+	Robot rob = new Robot (7,7, North,0);
 	// Main method to make this self-contained
 	public static void main(String[] args) {
 		// LEAVE THIS ALONE!!!!!!
 		String worldName = "robot/basicRoom.wld";
-
+		
 		Roomba cleaner = new Roomba();
 		int totalBeepers = cleaner.cleanRoom(worldName, 7, 6);
 		System.out.println("Roomba cleaned up a total of " + totalBeepers + " beepers.");
@@ -28,6 +29,7 @@ public class Roomba implements Directions {
 
 		World.readWorld(worldName);
 		World.setVisible(true);
+		World.setDelay(3);
 
 
 		/** This section will have all the logic that takes the Robot to every location
@@ -37,7 +39,104 @@ public class Roomba implements Directions {
 
 		// the line below causes a null pointer exception
 		// what is that and why are we getting it?
-		roomba.move();
+		rob.turnLeft();
+		rob.turnLeft();
+		rob.turnLeft();
+		rob.move();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.move();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.move();
+		rob.move();
+		rob.turnLeft();
+		rob.move();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.move();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.turnLeft();
+		rob.move();
+		rob.move();
+		rob.move();
+		rob.move();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.turnLeft();
+		rob.turnLeft();
+		rob.turnLeft();
+		rob.move();
+		rob.turnLeft();
+		rob.turnLeft();
+		rob.turnLeft();
+		rob.move();
+		rob.move();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.move();
+		rob.move();
+		rob.move();
+		rob.move();
+		rob.turnLeft();
+		rob.move();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.turnLeft();
+		rob.move();
+		rob.move();
+		rob.move();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.move();
+		rob.move();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+		rob.pickBeeper();
+
+		
+		
 
 
 		int totalBeepers = 0; // Need to move this somewhere else.
