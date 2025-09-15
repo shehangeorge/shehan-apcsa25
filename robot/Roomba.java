@@ -120,15 +120,16 @@ public class Roomba implements Directions {
 	}
 
 	System.out.println("STATISTICS");
-	System.out.println("the total area of the world is " + totalArea);
-	System.out.println("the total number of piles is "
-	System.out.printnumberOfPiles);
-	System.out.println("the percent dirty is ");
-	System.out.println(100* numberOfPiles/totalArea));
-	System.out.print("the average pile size is")
+	System.out.println("the total area of the world: ");
+	System.out.println(totalArea);
+	System.out.print("the total number of piles: ");
+	System.out.println(numberOfPiles);
+	System.out.println("the percent dirty: ");
+	System.out.println(100* numberOfPiles/totalArea);
+	System.out.print("the average pile size: ");
 	System.out.println((totalBeepers/numberOfPiles));
 	System.out.println("Location of Largest Pile: (" + st + ","  + av + ")" );
-	System.out.print("the largest pile is: ");
+	System.out.print("largest pile has: ");
 	System.out.println(largestPile);
 	return totalBeepers;
 
