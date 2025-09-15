@@ -30,9 +30,6 @@ public class Roomba implements Directions {
 		World.readWorld(worldName);
 		World.setVisible(true);
 		World.setDelay(0);
-	
-
-
 		/** This section will have all the logic that takes the Robot to every location
 		 * and cleans up all piles of beepers. Think about ways you can break this
 		 * large, complex task into smaller, easier to solve problems.
@@ -40,24 +37,15 @@ public class Roomba implements Directions {
 
 		// *the line below causes a null pointer exception
 		// *what is that and why are we getting it
-
 		int totalArea = 0;
-
 		int largestPile = 0;
-		
 		int previousPile = 0;
-
 		int numberOfPiles = 0;
-
-		
-
-
-
+//all the variables have to be defined in order to be reported at the end
 		while(roomba.frontIsClear()){
-			
 			roomba.move();
 			totalArea++;
-
+//allows the roomba to measure lxw and show the total area at the end at STATISTICS
 			if (roomba.nextToABeeper()){
 				previousPile = 0;
 				numberOfPiles++;
@@ -101,11 +89,11 @@ public class Roomba implements Directions {
 	}
 
 	System.out.println("STATISTICS");
-	System.out.println("the total area of the world: ");
+	System.out.print("the total area of the world: ");
 	System.out.println(totalArea);
 	System.out.print("total number of piles: ");
 	System.out.println(numberOfPiles);
-	System.out.println("percent of the world that was dirty: ");
+	System.out.print("percent of the world that is now dirty: ");
 	System.out.println(100* numberOfPiles/totalArea);
 	System.out.print("average pile size: ");
 	System.out.println((totalBeepers/numberOfPiles));
