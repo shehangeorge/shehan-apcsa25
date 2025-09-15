@@ -4,11 +4,10 @@ import kareltherobot.*;
 
 public class Roomba implements Directions {
 
-	Robot rob = new Robot (7,7, North,0);
 	// Main method to make this self-contained
 	public static void main(String[] args) {
 		// LEAVE THIS ALONE!!!!!!
-		String worldName = "robot/basicRoom.wld";
+		String worldName = "robot/finalTestWorld2024 (1).wld";
 		
 		Roomba cleaner = new Roomba();
 		int totalBeepers = cleaner.cleanRoom(worldName, 7, 6);
@@ -20,6 +19,11 @@ public class Roomba implements Directions {
 	private Robot roomba;
 
 	// You will need to add many variables!!
+	private int totalBeepers = 0;
+
+	public boolean needToCleanMore;
+
+	public int biggestPile;
 
 
 	public int cleanRoom(String worldName, int startX, int startY) {
@@ -39,103 +43,52 @@ public class Roomba implements Directions {
 
 		// the line below causes a null pointer exception
 		// what is that and why are we getting it?
-		rob.turnLeft();
-		rob.turnLeft();
-		rob.turnLeft();
-		rob.move();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.move();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.move();
-		rob.move();
-		rob.turnLeft();
-		rob.move();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.move();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.turnLeft();
-		rob.move();
-		rob.move();
-		rob.move();
-		rob.move();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.turnLeft();
-		rob.turnLeft();
-		rob.turnLeft();
-		rob.move();
-		rob.turnLeft();
-		rob.turnLeft();
-		rob.turnLeft();
-		rob.move();
-		rob.move();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.move();
-		rob.move();
-		rob.move();
-		rob.move();
-		rob.turnLeft();
-		rob.move();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.turnLeft();
-		rob.move();
-		rob.move();
-		rob.move();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.move();
-		rob.move();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
-		rob.pickBeeper();
 
-		
+		roomba = new Robot (startX, startY, East, 0);
+		if (roomba.facingEast())
+		{
+			roomba.turnLeft();
+				if (roomba.frontIsClear())
+			{
+				roomba.move();
+				
+
+			}
+			else
+			{
+					needToCleanMore = false;
+			}
+			roomba.turnLeft();
+		}
+		else{
+			roomba.turnLeft();
+			roomba.turnLeft();
+			roomba.turnLeft();
+				if (roomba.frontIsClear())
+				{
+					roomba.move();
+					
+				}
+				else
+				{
+					needToCleanMore = false;
+				}
+
+		}
+
+		while(roomba.frontIsClear())
+		{
+			int sizeOfPile = 0;
+			while(roomba.nextToABeeper())
+			{
+				roomba.pickBeeper();
+				sizeOfPile++;
+
+			}
+			biggestPile = sizeOfPile;
+
+			roomba.move();
+		}
 		
 
 
