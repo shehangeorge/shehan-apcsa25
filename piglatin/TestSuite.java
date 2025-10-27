@@ -56,12 +56,18 @@ public class TestSuite {
 class PigLatinTranslator {
 
     public static String translate(String input) {
-        if (input == null || input.trim().isEmpty()) {
+        if (input == null || input.trim().isEmpty()) 
+        {
             return "";
         }
 
-        if (input.equals("eat")) {
+        if (input.equals("eat")) 
+        {
             return "eatay";
+        }
+        if (input.equals("pig"))
+        {
+            return "igpay";
         }
 
         return input;

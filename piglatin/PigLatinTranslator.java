@@ -29,14 +29,20 @@ public class PigLatinTranslator {
     private static String translateWord(String input) {
         System.out.println("  -> translateWord('" + input + "')");
 
-        String result = "";
+        if (input.length()==0) 
+            return "";
+        if (input.trim().length()==0)
+            return "";
+
+        return input;
+        
 
         // TODO: Replace this code to correctly translate a single word.
         // Start here first!
         // This is the first place to work.
-        result = input; // delete this line
+         // delete this line
 
-        return result;
+        
     }
 
     // Add additonal private methods here.
