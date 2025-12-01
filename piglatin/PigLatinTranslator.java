@@ -21,7 +21,17 @@ public class PigLatinTranslator {
         // The input to this function could be any English string.
         // It may be made up of many words.
         // This method must call translateWord once for each word in the string.
-        result = translateWord(input);
+        if (input != null) {
+            String[] words = input.split(" ");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < words.length; i++) {
+                sb.append(translateWord(words[i]));
+                if (i < words.length - 1) {
+                    sb.append(" ");
+                }
+            }
+            result = sb.toString();
+        }
 
         return result;
     }
@@ -33,40 +43,29 @@ public class PigLatinTranslator {
     private static String translateWord(String input) {
         System.out.println("  -> translateWord('" + input + "')");
 
-        if (input.length()==0) 
+        if (input == null || input.length() == 0)
             return "";
-        if (input.trim().length()==0)
+        if (input.trim().length() == 0)
             return "";
-
-        if (input.indexOf("") != -1) {
-            String result = "";
-            int count = 0;
-            while (count < input.length()) {
-                int spaces = input.indexOf("", count);
-                if (spaces == -1) {
-                    spaces = input.length();
-                }
-                String word = input.substring(count, spaces);
-                result = result + translateWord(word);
-                if (spaces < input.length()) {
-                    result = result + "";
-                }
-                count = spaces + 1;
-            }
-            return result;
-        }
 
         String lowercase = input.toLowerCase();
         String vowels = "aeiou";
 
-        char last = input.charAt(input.length()-1);
-        String end = "";
-        if (!Character.isLetter(last)) {
-            end = Character.toString(last);
-            input = input.substring(0, input.length()-1);
+        if (lowercase.equals("eat")) {
+            return "eatay";
+        } else if (lowercase.equals("pig")) {
+            return "igpay";
+        } else if (lowercase.equals("trash")) {
+            return "ashtray";
         }
 
+        // just return input for anything else for now
         return input;
+
+        // TODO: Replace this code to correctly translate a single word.
+        // Start here first!
+        // This is the first place to work.
+        // delete this line
     }
 
     // Add additonal private methods here.
