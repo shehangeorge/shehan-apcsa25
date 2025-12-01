@@ -72,4 +72,9 @@ class PigLatinTranslator {
 
         return input;
     }
+
+    public static Book translate(Book input) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'translate'");
+    }
 }

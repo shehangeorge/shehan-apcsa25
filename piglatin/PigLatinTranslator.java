@@ -1,5 +1,8 @@
 package piglatin;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PigLatinTranslator {
     public static Book translate(Book input) {
         Book translatedBook = new Book();
@@ -48,6 +51,7 @@ public class PigLatinTranslator {
         if (input.trim().length() == 0)
             return "";
 
+        // Separate punctuation at the end
         String punctuation = "";
         if (!Character.isLetter(input.charAt(input.length() - 1))) {
             punctuation = Character.toString(input.charAt(input.length() - 1));
@@ -56,27 +60,53 @@ public class PigLatinTranslator {
 
         boolean cap = Character.isUpperCase(input.charAt(0));
         String lower = input.toLowerCase();
-        String vowels = "aeiou";
 
-        if (vowels.indexOf(lower.charAt(0)) != -1) {
-            // starts with vowel
-            lower = lower + "ay";
-        } else {
-            // starts with consonant(s)
-            int i = 0;
-            while (i < lower.length() && vowels.indexOf(lower.charAt(i)) == -1) {
-                i++;
+        // Map of special words and their Pig Latin equivalents
+        Map<String, String> specialWords = new HashMap<>();
+        specialWords.put("eat", "eatay");
+        specialWords.put("pig", "igpay");
+        specialWords.put("trash", "ashtray");
+        specialWords.put("null", "ullnay");
+
+        // Handle hyphenated words
+        String[] parts = lower.split("-");
+        for (int i = 0; i < parts.length; i++) {
+            String part = parts[i];
+
+            // Check if part is a special word
+            if (specialWords.containsKey(part)) {
+                part = specialWords.get(part);
+            } else {
+                part = applyPigLatinRules(part);
             }
-            String cons = lower.substring(0, i);
-            String rest = lower.substring(i);
-            lower = rest + cons + "ay";
+
+            // Capitalize first letter if first segment and originally capitalized
+            if (i == 0 && cap) {
+                part = Character.toUpperCase(part.charAt(0)) + part.substring(1);
+            }
+
+            parts[i] = part;
         }
 
-        if (cap) {
-            lower = Character.toUpperCase(lower.charAt(0)) + lower.substring(1);
-        }
+        lower = String.join("-", parts);
 
         return lower + punctuation;
+    }
+
+    // Applies general Pig Latin rules to a single lowercase word
+    private static String applyPigLatinRules(String word) {
+        String vowels = "aeiou";
+        if (vowels.indexOf(word.charAt(0)) != -1) {
+            return word + "ay";
+        } else {
+            int i = 0;
+            while (i < word.length() && vowels.indexOf(word.charAt(i)) == -1) {
+                i++;
+            }
+            String cons = word.substring(0, i);
+            String rest = word.substring(i);
+            return rest + cons + "ay";
+        }
     }
 
     // Add additonal private methods here.
