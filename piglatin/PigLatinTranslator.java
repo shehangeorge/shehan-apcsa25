@@ -37,7 +37,7 @@ public class PigLatinTranslator {
     }
 
     /**
-     * @param input
+     * translate a single word to Pig Latin
      * @return
      */
     private static String translateWord(String input) {
@@ -54,30 +54,29 @@ public class PigLatinTranslator {
             input = input.substring(0, input.length() - 1);
         }
 
-        String lowercase = input.toLowerCase();
+        boolean cap = Character.isUpperCase(input.charAt(0));
+        String lower = input.toLowerCase();
+        String vowels = "aeiou";
 
-        if (lowercase.equals("eat")) {
-            return "eatay" + punctuation;
-        } else if (lowercase.equals("pig")) {
-            return "igpay" + punctuation;
-        } else if (lowercase.equals("trash")) {
-            boolean cap = Character.isUpperCase(input.charAt(0));
-            String result = "ashtray";
-            if (cap) {
-                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+        if (vowels.indexOf(lower.charAt(0)) != -1) {
+            // starts with vowel
+            lower = lower + "ay";
+        } else {
+            // starts with consonant(s)
+            int i = 0;
+            while (i < lower.length() && vowels.indexOf(lower.charAt(i)) == -1) {
+                i++;
             }
-            return result + punctuation;
-        } else if (lowercase.equals("null")) {
-            return "ullnay" + punctuation;
+            String cons = lower.substring(0, i);
+            String rest = lower.substring(i);
+            lower = rest + cons + "ay";
         }
 
-        // just return input for anything else for now
-        return input + punctuation;
+        if (cap) {
+            lower = Character.toUpperCase(lower.charAt(0)) + lower.substring(1);
+        }
 
-        // TODO: Replace this code to correctly translate a single word.
-        // Start here first!
-        // This is the first place to work.
-        // delete this line
+        return lower + punctuation;
     }
 
     // Add additonal private methods here.
