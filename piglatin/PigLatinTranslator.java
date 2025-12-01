@@ -48,19 +48,31 @@ public class PigLatinTranslator {
         if (input.trim().length() == 0)
             return "";
 
+        String punctuation = "";
+        if (!Character.isLetter(input.charAt(input.length() - 1))) {
+            punctuation = Character.toString(input.charAt(input.length() - 1));
+            input = input.substring(0, input.length() - 1);
+        }
+
         String lowercase = input.toLowerCase();
-        String vowels = "aeiou";
 
         if (lowercase.equals("eat")) {
-            return "eatay";
+            return "eatay" + punctuation;
         } else if (lowercase.equals("pig")) {
-            return "igpay";
+            return "igpay" + punctuation;
         } else if (lowercase.equals("trash")) {
-            return "ashtray";
+            boolean cap = Character.isUpperCase(input.charAt(0));
+            String result = "ashtray";
+            if (cap) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
+            return result + punctuation;
+        } else if (lowercase.equals("null")) {
+            return "ullnay" + punctuation;
         }
 
         // just return input for anything else for now
-        return input;
+        return input + punctuation;
 
         // TODO: Replace this code to correctly translate a single word.
         // Start here first!
