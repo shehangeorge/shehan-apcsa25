@@ -33,12 +33,15 @@ public class App {
         {
             // Starter book
             Book input = new Book();
+            Book input2 = new Book();
 
             // Example reading from a URL
             input.readFromUrl("Romeo and Juliet", "https://www.gutenberg.org/files/1513/1513-0.txt");
+            input2.readFromUrl("The Strange Case of Dr. Jekyll and Mr. Hyde", "https://www.gutenberg.org/cache/epub/43/pg43.txt");
 
             // Optional: preview first 5 lines
             input.printlines(0,5);
+            input2.printlines(0,5);
 
             // Save translated book directly line by line
             try {
@@ -56,7 +59,28 @@ public class App {
 
             } catch (IOException e) {
                 e.printStackTrace();
+         
+         
             }
+            try {
+                BufferedWriter writer2 = new BufferedWriter(new FileWriter("MYtranslatedbook.txt"));
+
+                for (int i = 0; i < input2.getLineCount(); i++) {
+                    String line = input2.getLine(i);
+                    String translatedLine = PigLatinTranslator.translate(line);
+                    writer2.write(translatedLine);
+                    writer2.newLine();
+                }
+
+                writer2.close();
+            
+
+            } catch (IOException e) {
+                e.printStackTrace();
+       
         }
+
+
     }
+}
 }
