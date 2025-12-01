@@ -1,5 +1,9 @@
 package piglatin;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class App {
     public static void main(String[] args)
     {
@@ -21,7 +25,6 @@ public class App {
                 - It will tell you which cases return expected output or not
          */
 
-
         // Run tests, comment out once they pass.
         int score = TestSuite.run();
 
@@ -31,18 +34,29 @@ public class App {
             // Starter book
             Book input = new Book();
 
-            // Start with a "test" book based on a string.
-            // Get this to work, and all the tests to pass first.
-            input.readFromString("TestBook", "Dog\nCat\nMouse");
-
             // Example reading from a URL
-            //input.readFromUrl("Romeo and Juliette", "https://gutenberg.pglaf.org/cache/epub/1513/pg1513.txt");
+            input.readFromUrl("Romeo and Juliet", "https://www.gutenberg.org/files/1513/1513-0.txt");
 
-            input.printlines(0,2);
-            Book output = PigLatinTranslator.translate(input);
-            output.printlines(0,2);
-            output.writeToFile("test.txt");
+            // Optional: preview first 5 lines
+            input.printlines(0,5);
+
+            // Save translated book directly line by line
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("translatedbook.txt"));
+
+                for (int i = 0; i < input.getLineCount(); i++) {
+                    String line = input.getLine(i);
+                    String translatedLine = PigLatinTranslator.translate(line);
+                    writer.write(translatedLine);
+                    writer.newLine();
+                }
+
+                writer.close();
+                
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
-

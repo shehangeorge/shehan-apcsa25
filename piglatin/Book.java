@@ -52,26 +52,39 @@ public class Book {
 
         // TODO: use Scanner to populate the book
         // use: text.add(line) to add a line to the book.
+        Scanner sc = new Scanner(string);
+        while (sc.hasNextLine()) {
+            text.add(sc.nextLine());
+        }
+        sc.close();
     }
 
     public void readFromUrl(String title, String url) {
         // load a book from a URL.
-        // https://docs.oracle.com/javase/tutorial/networking/urls/readingURL.html
         this.title = title;
 
         try {
             URL bookUrl = URI.create(url).toURL();
-            // TODO: use Scanner to populate the book
-            // Scanner can open a file on a URL like this:
-            // Scanner(bookUrl.openStream())
-            // use: text.add(line) to add a line to the book.
+            Scanner sc = new Scanner(bookUrl.openStream());
+            while (sc.hasNextLine()) {
+                text.add(sc.nextLine());
+            }
+            sc.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     void writeToFile(String name) {
-        // TODO: Add code here to write the contents of the book to a file.
-        // Must write to file using provided name.
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(name));
+            for (String line : text) {
+                writer.write(line);
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
