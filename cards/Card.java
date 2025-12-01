@@ -1,13 +1,13 @@
 package cards;
 
 public class Card {
-    private int suit;
-    private int value;
+    private int suit; //assign a number to each suit and those are the ints
+    private int value; //a number to each number obviously and then a number to each face card (e.g. 11 for jack, etc.)
 
     private static final String[] SUITS = {"♦", "♣", "♥", "♠"};
     private static final String[] VALUES = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 
-    public Card(int suit, int value) {
+    public Card(int suit, int value) { //constructor to only use valid range
         if (suit < 0) this.suit = 0;
         else if (suit > 3) this.suit = 3;
         else this.suit = suit;
@@ -18,10 +18,10 @@ public class Card {
     }
 
     public int getValue() {
-        return value;
+        return value; //returns the value of the card as an int
     }
 
     public String toString() {
-        return SUITS[suit] + VALUES[value];
+        return SUITS[suit] + VALUES[value]; //returns the value of the card as specified in the array (w/ symbols and all)
     }
 }
