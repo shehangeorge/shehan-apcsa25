@@ -1,8 +1,5 @@
 package piglatin;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class PigLatinTranslator {
     public static Book translate(Book input) {
         Book translatedBook = new Book();
@@ -63,55 +60,47 @@ public class PigLatinTranslator {
             input = input.substring(0, input.length() - 1);
         }
 
-        boolean cap = Character.isUpperCase(input.charAt(0));
-        String lower = input.toLowerCase();
-
-        // Map of special words and their Pig Latin equivalents
-        Map<String, String> specialWords = new HashMap<>();
-        specialWords.put("eat", "eatay");
-        specialWords.put("pig", "igpay");
-        specialWords.put("trash", "ashtray");
-        specialWords.put("null", "ullnay");
-
         // Handle hyphenated words
-        String[] parts = lower.split("-");
+        String[] parts = input.split("-");
         for (int i = 0; i < parts.length; i++) {
             String part = parts[i];
-
-            // Check if part is a special word
-            if (specialWords.containsKey(part)) {
-                part = specialWords.get(part);
-            } else {
-                part = applyPigLatinRules(part);
-            }
-
-            // Capitalize first letter if first segment and originally capitalized
-            if (i == 0 && cap) {
-                part = Character.toUpperCase(part.charAt(0)) + part.substring(1);
-            }
-
+            part = applyPigLatinPreserveCluster(part);
             parts[i] = part;
         }
 
-        lower = String.join("-", parts);
-
-        return lower + punctuation;
+        return String.join("-", parts) + punctuation;
     }
 
-    // Applies general Pig Latin rules to a single lowercase word
-    private static String applyPigLatinRules(String word) {
-        String vowels = "aeiou";
-        if (vowels.indexOf(word.charAt(0)) != -1) {
-            return word + "ay";
-        } else {
-            int i = 0;
-            while (i < word.length() && vowels.indexOf(word.charAt(i)) == -1) {
-                i++;
-            }
-            String cons = word.substring(0, i);
-            String rest = word.substring(i);
-            return rest + cons + "ay";
+    // General Pig Latin rules preserving internal case, including consonant cluster
+    private static String applyPigLatinPreserveCluster(String word) {
+        if (word.length() == 0) return word;
+
+        String vowels = "aeiouAEIOU";
+        int firstVowelIndex = 0;
+
+        // Find first vowel index
+        while (firstVowelIndex < word.length() && vowels.indexOf(word.charAt(firstVowelIndex)) == -1) {
+            firstVowelIndex++;
         }
+
+        String result;
+        if (firstVowelIndex == 0) {
+            // starts with vowel
+            result = word + "ay";
+        } else {
+            String consonantCluster = word.substring(0, firstVowelIndex);
+            String rest = word.substring(firstVowelIndex);
+
+            // Move consonant cluster to end, lowercase cluster for 'ay'
+            result = rest + consonantCluster.toLowerCase() + "ay";
+
+            // Capitalize first letter if original word started uppercase
+            if (Character.isUpperCase(word.charAt(0))) {
+                result = Character.toUpperCase(result.charAt(0)) + result.substring(1);
+            }
+        }
+
+        return result;
     }
 
     // Add additonal private methods here.
