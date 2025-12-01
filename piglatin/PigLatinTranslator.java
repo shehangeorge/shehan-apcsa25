@@ -37,45 +37,36 @@ public class PigLatinTranslator {
             return "";
         if (input.trim().length()==0)
             return "";
-        if (input.indexOf("") !=-1){
+
+        if (input.indexOf("") != -1) {
             String result = "";
             int count = 0;
-            while (count<input.length()){
-                int spaces = input.indexOf("",count);
-                if (spaces == -1)
-                    {
+            while (count < input.length()) {
+                int spaces = input.indexOf("", count);
+                if (spaces == -1) {
                     spaces = input.length();
-                    }
-                String word = input.substring(count,spaces);
+                }
+                String word = input.substring(count, spaces);
                 result = result + translateWord(word);
-                if (spaces<input.length())
-                {
+                if (spaces < input.length()) {
                     result = result + "";
                 }
                 count = spaces + 1;
-            
             }
             return result;
-            
+        }
+
         String lowercase = input.toLowerCase();
         String vowels = "aeiou";
-        if (!Character.isLetter(last.CharAt(0))){
-            end=last;
+
+        char last = input.charAt(input.length()-1);
+        String end = "";
+        if (!Character.isLetter(last)) {
+            end = Character.toString(last);
             input = input.substring(0, input.length()-1);
         }
-        
 
-        }
-        }
-         return input;
-        
-
-        // TODO: Replace this code to correctly translate a single word.
-        // Start here first!
-        // This is the first place to work.
-         // delete this line
-
-        
+        return input;
     }
 
     // Add additonal private methods here.
@@ -83,4 +74,3 @@ public class PigLatinTranslator {
     // private static String capitalizeFirstLetter(String input)
 
 }
-
