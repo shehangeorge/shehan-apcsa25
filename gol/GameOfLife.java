@@ -46,10 +46,13 @@ public class GameOfLife implements Board {
         grid = nextGrid;
     }
 
-    public int countNeighbors(int x, int y) {
+public int countNeighbors(int x, int y) {
         int count = 0;
         // count the number of neighbors the cell has
         // use the get(x,y) method to read any board state you need.
+        count = get(x - 1, y - 1) + get(x, y - 1) + get(x + 1, y - 1) +
+                get(x - 1, y) + get(x + 1, y) +
+                get(x - 1, y + 1) + get(x, y + 1) + get(x + 1, y + 1);
         return count;
     }
 
@@ -57,9 +60,9 @@ public class GameOfLife implements Board {
     // Locations outside the board will loop back into the board.
     // Ex: -1 will read board.length-1
     public int get(int x, int y) {
-        int xLimit = board.length;
-        int yLimit= board[0].length;
-        return board[(x+xLimit)%xLimit][(y+yLimit)%yLimit];
+        int xLimit = grid.length;
+        int yLimit = grid[0].length;
+        return grid[(x+xLimit)%xLimit][(y+yLimit)%yLimit];
     }
 
     // Test helper to get the whole board state
