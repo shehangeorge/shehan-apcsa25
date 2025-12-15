@@ -68,22 +68,22 @@ public int countNeighbors(int x, int y) {
     // Test helper to get the whole board state
     public int[][] get()
     {
-        return board;
+        return grid;
     }
 
     // Test helper to print the current state
     public void print(){
         // Print the header
         System.out.print("\n ");
-        for (int y = 0; y < board[0].length; y++) {
+        for (int y = 0; y < grid[0].length; y++) {
             System.out.print(y%10 + " ");
         }
 
-        for (int x = 0; x < board.length; x++) {
+        for (int x = 0; x < grid.length; x++) {
             System.out.print("\n" + x%10);
-            for (int y=0; y<board[x].length; y++)
+            for (int y=0; y<grid[x].length; y++)
             {
-                if (board[x][y] == 1)
+                if (grid[x][y] == 1)
                 {
                     System.out.print("⬛");
                 }
