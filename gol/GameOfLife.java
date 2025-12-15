@@ -14,9 +14,12 @@ public class GameOfLife implements Board {
             }
         }
     }
-    // Run the simulation for a number of turns
+  // Run the simulation for a number of turns
     public void run(int turns) {
         // call step the number of times requested
+        for (int i = 0; i < turns; i++) {
+            step();
+        }
     }
 
     // Step the simulation forward one turn.
@@ -24,8 +27,24 @@ public class GameOfLife implements Board {
     {
         print();
         // Update the game board, store a 1 if the cell is alive and a 0 otherwise.
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[][] nextGrid = new int[rows][cols];
+        
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                int count = countNeighbors(r, c);
+                int cell = grid[r][c];
+                
+                if (cell == 1) {
+                    nextGrid[r][c] = (count == 2 || count == 3) ? 1 : 0;
+                } else {
+                    nextGrid[r][c] = (count == 3) ? 1 : 0;
+                }
+            }
+        }
+        grid = nextGrid;
     }
-
 
     public int countNeighbors(int x, int y) {
         int count = 0;
