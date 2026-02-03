@@ -1,6 +1,5 @@
 package sorting;
 
-public class InsertionSort implements Sorter {
 
     public void sort(int[] input) {
         
