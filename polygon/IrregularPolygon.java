@@ -39,18 +39,25 @@ public class IrregularPolygon {
     }
     return Math.abs(area) / 2.0;
     }
-
-    public void draw()
-    {
-        // Wrap the DrawingTool in a try/catch to allow development without need for graphics.
-        try {
-            // TODO: Draw the polygon.
-            // Documents: https://pavao.org/compsci/gpdraw/html/gpdraw/DrawingTool.html
-            //DrawingTool myDrawingTool = new DrawingTool(new SketchPad(500, 500));
-            //myDrawingTool.move(50, 50);
-        } catch (java.awt.HeadlessException e) {
-            System.out.println("Exception: No graphics support available.");
+public void draw()
+{
+    // Wrap the DrawingTool in a try/catch to allow development without need for graphics.
+    try {
+        // TODO: Draw the polygon.
+        // Documents: https://pavao.org/compsci/gpdraw/html/gpdraw/DrawingTool.html
+        DrawingTool myDrawingTool = new DrawingTool(new SketchPad(500, 500));
+        if (myPolygon.isEmpty()) return;
+        Point2D.Double first = myPolygon.get(0);
+        myDrawingTool.up();
+        myDrawingTool.move(first.x, first.y);
+        myDrawingTool.down();
+        for (int i = 1; i < myPolygon.size(); i++) {
+            myDrawingTool.move(myPolygon.get(i).x, myPolygon.get(i).y);
         }
+        myDrawingTool.move(first.x, first.y);
+    } catch (java.awt.HeadlessException e) {
+        System.out.println("Exception: No graphics support available.");
     }
+}
 
 }
