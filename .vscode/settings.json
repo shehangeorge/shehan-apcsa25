@@ -3,7 +3,9 @@
     ""
   ],
   "java.project.referencedLibraries": [
-    "irregularPolygon/gpdraw.jar",
+    "polygon/gpdraw.jar",
     "robot/KarelJRobot.jar"
+  
+
   ]
 }
