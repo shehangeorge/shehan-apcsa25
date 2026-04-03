@@ -2,28 +2,11 @@ package tower;
 
 public class TowerModel {
 
-    // 2d array storing game state
     private IntegerStack[] towers;
-
-    // Final tower height
     private int towerHeight = 0;
-
-    // Debug metrics
     private int printCounter = 0;
     private int moveCounter = 0;
 
-    /* This class implements a model of a tower of Hanoi game.
-
-        |    |    |
-        =    |    |
-       ===   |    |
-      =====  |    |
-     ------------------
-        0    1    2
-
-     Example of a game of height three in the starting position.
-
-    */
     public TowerModel(int height)
     {
         towerHeight = height;
@@ -38,21 +21,34 @@ public class TowerModel {
         }
     }
 
-    // get the total number of disks
     public int height()
     {
         return towerHeight;
     }
 
-
-    // Move one disk from the source stack to the destination stack.
     public void move(int source, int destination)
     {
         System.out.println("Move #" + ++moveCounter + " from " + source + " to " + destination);
-        // TODO!!
+
+        int sourceDisk = towers[source].peek();
+        int destDisk = towers[destination].peek();
+
+        if (sourceDisk == 0)
+        {
+            System.out.println("  Invalid move: source tower " + source + " is empty.");
+            return;
+        }
+
+        if (destDisk != 0 && sourceDisk > destDisk)
+        {
+            System.out.println("  Invalid move: cannot place disk " + sourceDisk + " on disk " + destDisk);
+            return;
+        }
+
+        int disk = towers[source].pop();
+        towers[destination].push(disk);
     }
 
-    // Helper method to nicely print the current model state.
     public void print()
     {
         System.out.print("Print #" + ++printCounter + " Towers of Hanoi\n");
@@ -77,7 +73,6 @@ public class TowerModel {
         System.out.println();
     }
 
-    // Test instrumentation
     public IntegerStack[] getTowers()
     {
         return towers;
